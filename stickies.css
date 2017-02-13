@@ -1,0 +1,64 @@
+body{
+  text-align: center;
+}
+
+#buttons{
+  margin-bottom: 15px;
+}
+
+.title{
+  font-family: Helvetica;
+  text-align: center;
+  font-size: 24pt;
+}
+
+.hide {
+  display: none;
+}
+
+.removeButton{
+  cursor: pointer;
+  /*z-index: 1;*/
+}
+
+.sticky{
+  box-shadow: 5px 5px 5px gray;
+  width: 150px;
+  height: 150px;
+  padding: 10px;
+  background-color: #7FDBFF;
+  margin-bottom: 10px;
+  position: relative;
+  /*z-index: -1;*/
+}
+
+
+ul, li {
+  list-style: none;
+}
+
+ul {
+  overflow: hidden;
+  list-style: none;
+}
+
+.note-content{
+  background-color: #7FDBFF;
+}
+
+textarea{
+  border: none;
+  box-shadow: 5px 5px 5px gray;
+  width: 150px;
+  height: 150px;
+  padding: 10px;
+}
+
+.glyphicon, .glyphicon-remove{
+  top: 23px;
+  left: 65px;
+}
+DC9;
+  top: 350px;
+  left: 100px;
+}*/

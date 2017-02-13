@@ -1,0 +1,3 @@
+I used and modified the following tutorial to implement my stickies as well as the skeleton code used during the coding lab for Lecture 6.
+
+http://theburningmonk.com/2011/01/creating-a-sticky-note-app-with-html5-css3-and-javascript/
