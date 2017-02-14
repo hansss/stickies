@@ -1,57 +1,65 @@
 //a data structure for storing information about the team
-var stickyObject = {
-    stickies: [
-        {
-            text: ,
-        }
-    ],
+class aSticky {
+    constructor(text){
+        this.text = text;
+    }
 }
 
+
 function createNote(){
-    stickyObject.stickies.push({text:""})
-    localStorage.setItem(notes, stickyObject);
-    localStorage.setItem('notes', JSON.stringify(stickyObject));
+    var oldStorage = JSON.parse(localStorage.getItem('notes'));
+    oldStorage.push(new aSticky("new"));    
+    localStorage.setItem('notes', JSON.stringify(oldStorage));
     displayStickies();
 }
 
 function removeNote(){
-   stickyObject.stickies.splice(event.target.getAttribute("data-index"),1);
-   localStorage.setItem('notes', JSON.stringify(stickyObject));
-   displayStickies(); 
+   // stickyObject.stickies.splice(event.target.getAttribute("data-index"),1);
+   // localStorage.setItem('notes', JSON.stringify(stickyObject));
+   // displayStickies(); 
 }
 
 function saveNotes(){
-    console.log("saved");
+    // console.log("saved");
     var parsedStickies = JSON.parse(localStorage.getItem('notes'));
+    console.log("parsed");
+    console.log(parsedStickies);
 
+    var allNotes = $('textarea.sticky');
+    for (var i=0; i< allNotes.length; i++) {
+        parsedStickies[i].text = allNotes[i].value;
+    }
 
-    $('textarea').each(function(i, e) {
-        console.log(e);  
-        // 0: <div id="outer"><div id="inner"></div></div>
-        // 1: <div id="inner"></div>
-    });
+    localStorage.setItem('notes', JSON.stringify(parsedStickies));
+    // $('textarea').each(function(i, e) {
+    //     console.log(e);  
+    // });
 
-    // for (var i=0; i< parsedStickies.stickies.length; i++) {
-    //     parsedStickies.
-    // }
 
 }
 
 function displayStickies() { 
+    if (localStorage.notes) {
+        // localStorage.notes = Number(localStorage.clickcount) + 1;
+    } else {
+        // localStorage.notes = [];
+        arr = [];
+        localStorage.setItem("notes", JSON.stringify(arr));
+    }
+
+
     var stickiesHtml = "";
     var parsedStickies = JSON.parse(localStorage.getItem('notes'));
-    for (var i=0; i< parsedStickies.stickies.length; i++) {
+    console.log(parsedStickies);
+    for (var i=0; i< parsedStickies.length; i++) {
+        console.log("HI");
+        console.log(parsedStickies[i].text);
         stickiesHtml += "<a class='glyphicon glyphicon-remove removeButton' data-index='" + i + "' />" + "<br>";
-        // stickiesHtml += '<textarea class="sticky">' + stickyObject.stickies[i].text + '</textarea>';
-        stickiesHtml += '<textarea class="sticky">' + parsedStickies.stickies[i].text + '</textarea>';      
+        stickiesHtml += '<textarea class="sticky">' + parsedStickies[i].text + '</textarea>';
+             
     }
 
     $("#stickiesList").empty().append(stickiesHtml);
-
-    // Close function
-    $(".removeButton").click(function () {
-        removeNote();
-    });
 
 }
 
