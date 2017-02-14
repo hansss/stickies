@@ -14,16 +14,15 @@ function createNote(){
 }
 
 function removeNote(){
-   // stickyObject.stickies.splice(event.target.getAttribute("data-index"),1);
-   // localStorage.setItem('notes', JSON.stringify(stickyObject));
-   // displayStickies(); 
+    var oldStorage = JSON.parse(localStorage.getItem('notes'));
+    oldStorage.splice(event.target.getAttribute("data-index"),1);
+    localStorage.setItem('notes', JSON.stringify(oldStorage));
+    displayStickies(); 
 }
 
 function saveNotes(){
     // console.log("saved");
     var parsedStickies = JSON.parse(localStorage.getItem('notes'));
-    console.log("parsed");
-    console.log(parsedStickies);
 
     var allNotes = $('textarea.sticky');
     for (var i=0; i< allNotes.length; i++) {
@@ -31,11 +30,7 @@ function saveNotes(){
     }
 
     localStorage.setItem('notes', JSON.stringify(parsedStickies));
-    // $('textarea').each(function(i, e) {
-    //     console.log(e);  
-    // });
-
-
+    displayStickies(); 
 }
 
 function displayStickies() { 
@@ -50,23 +45,23 @@ function displayStickies() {
 
     var stickiesHtml = "";
     var parsedStickies = JSON.parse(localStorage.getItem('notes'));
-    console.log(parsedStickies);
     for (var i=0; i< parsedStickies.length; i++) {
-        console.log("HI");
-        console.log(parsedStickies[i].text);
         stickiesHtml += "<a class='glyphicon glyphicon-remove removeButton' data-index='" + i + "' />" + "<br>";
         stickiesHtml += '<textarea class="sticky">' + parsedStickies[i].text + '</textarea>';
-             
     }
 
     $("#stickiesList").empty().append(stickiesHtml);
+
+    $(".removeButton").click(function () {
+        removeNote();
+    });
 
 }
 
 
 
 $(function() {
-    displayStickies(); //generate and render the html divs for the team
+    // displayStickies(); //generate and render the html divs for the team
 
 
     $("#newButton").click(function () {
@@ -74,7 +69,11 @@ $(function() {
     });
 
     $("#saveButton").click(function () {
-    saveNotes();
+        saveNotes();
     });
+
+
+
+    displayStickies();
 
 });

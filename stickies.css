@@ -18,6 +18,8 @@ body{
 
 .removeButton{
   cursor: pointer;
+  margin-bottom: 25px;
+
   /*z-index: 1;*/
 }
 
