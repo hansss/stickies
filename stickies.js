@@ -8,14 +8,15 @@ class aSticky {
 
 function createNote(){
     var oldStorage = JSON.parse(localStorage.getItem('notes'));
-    oldStorage.push(new aSticky("new"));    
+    // console.log(oldStorage);
+    oldStorage.stickies.push(new aSticky("new"));    
     localStorage.setItem('notes', JSON.stringify(oldStorage));
     displayStickies();
 }
 
 function removeNote(){
     var oldStorage = JSON.parse(localStorage.getItem('notes'));
-    oldStorage.splice(event.target.getAttribute("data-index"),1);
+    oldStorage.stickies.splice(event.target.getAttribute("data-index"),1);
     localStorage.setItem('notes', JSON.stringify(oldStorage));
     displayStickies(); 
 }
@@ -26,7 +27,7 @@ function saveNotes(){
 
     var allNotes = $('textarea.sticky');
     for (var i=0; i< allNotes.length; i++) {
-        parsedStickies[i].text = allNotes[i].value;
+        parsedStickies.stickies[i].text = allNotes[i].value;
     }
 
     localStorage.setItem('notes', JSON.stringify(parsedStickies));
@@ -45,9 +46,11 @@ function displayStickies() {
 
     var stickiesHtml = "";
     var parsedStickies = JSON.parse(localStorage.getItem('notes'));
-    for (var i=0; i< parsedStickies.length; i++) {
+    // console.log(parsedStickies);
+    // console.log(parsedStickies.stickies);
+    for (var i=0; i< parsedStickies.stickies.length; i++) {
         stickiesHtml += "<a class='glyphicon glyphicon-remove removeButton' data-index='" + i + "' />" + "<br>";
-        stickiesHtml += '<textarea class="sticky">' + parsedStickies[i].text + '</textarea>';
+        stickiesHtml += '<textarea class="sticky">' + parsedStickies.stickies[i].text + '</textarea>';
     }
 
     $("#stickiesList").empty().append(stickiesHtml);
@@ -62,7 +65,13 @@ function displayStickies() {
 
 $(function() {
     // displayStickies(); //generate and render the html divs for the team
-
+    // if (localStorage.notes) {
+    //     // localStorage.notes = Number(localStorage.clickcount) + 1;
+    // } else {
+    //     // localStorage.notes = [];
+    //     arr = [];
+    //     localStorage.setItem("notes", JSON.stringify(arr));
+    // }
 
     $("#newButton").click(function () {
         createNote();
